@@ -3,10 +3,21 @@ import { useState } from "react"
 import "./App.css"
 import CustomApolloProvider from "./CustomApolloProvider"
 import Subscriper from "./Subscriber"
+import { DocumentNode } from "graphql"
+import { gql } from "@apollo/client"
+
+function tryParseGql(query: string) {
+  try {
+    return gql(query)
+  } catch (err) {
+    return null
+  }
+}
 
 function App() {
   const [serverUrl, setServerUrl] = useState("")
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState<string>("")
+  const [parsedQuery, setParsedQuery] = useState<DocumentNode | null>(null)
   const [jsonPath, setJsonPath] = useState("$")
 
   return (
@@ -23,7 +34,10 @@ function App() {
         <br />
         <div className="row">
           <textarea
-            onChange={(e) => setQuery(e.currentTarget.value)}
+            onChange={(e) => {
+              setQuery(e.currentTarget.value)
+              setParsedQuery(tryParseGql(e.currentTarget.value))
+            }}
             placeholder="Enter the GQL subscription"
             value={query}
           />
@@ -38,7 +52,9 @@ function App() {
           />
         </div>
         <div className="row">
-          {!!query && <Subscriper query={query} jsonPath={jsonPath} />}
+          {parsedQuery && (
+            <Subscriper parsedQuery={parsedQuery} jsonPath={jsonPath} />
+          )}
         </div>
       </div>
     </CustomApolloProvider>

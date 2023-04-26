@@ -1,22 +1,23 @@
-import { useSubscription, gql } from "@apollo/client"
+import { useSubscription, gql, DocumentNode } from "@apollo/client"
 import { invoke } from "@tauri-apps/api/tauri"
 import { PropsWithChildren, useEffect } from "react"
-import { desktopDir } from "@tauri-apps/api/path"
+import { desktopDir, sep } from "@tauri-apps/api/path"
 import { JSONPath } from "jsonpath-plus"
 
 export default function Subscriper({
   jsonPath,
-  query,
-}: PropsWithChildren<{ jsonPath: string; query: string }>) {
-  const { data, loading } = useSubscription(gql(query))
+  parsedQuery,
+}: PropsWithChildren<{ jsonPath: string; parsedQuery: DocumentNode }>) {
+  const { data, loading } = useSubscription(parsedQuery)
 
   useEffect(() => {
     async function greet() {
       const text = JSONPath({ path: jsonPath, json: data, wrap: false })
+      if (!text) return
       try {
         const desktopPath = await desktopDir()
         await invoke("write_to_file", {
-          path: `${desktopPath}/test.txt`,
+          path: `${desktopPath}${sep}test.txt`,
           text,
         })
       } catch (err) {
