@@ -1,10 +1,11 @@
+import { gql } from "@apollo/client"
+import { DocumentNode } from "graphql"
 import { useState } from "react"
 
-import "./App.css"
 import CustomApolloProvider from "./CustomApolloProvider"
 import Subscriper from "./Subscriber"
-import { DocumentNode } from "graphql"
-import { gql } from "@apollo/client"
+
+import "./App.css"
 
 function tryParseGql(query: string) {
   try {

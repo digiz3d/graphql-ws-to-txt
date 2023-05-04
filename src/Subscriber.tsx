@@ -1,8 +1,8 @@
-import { useSubscription, gql, DocumentNode } from "@apollo/client"
-import { invoke } from "@tauri-apps/api/tauri"
-import { PropsWithChildren, useEffect } from "react"
+import { DocumentNode, useSubscription } from "@apollo/client"
 import { desktopDir, sep } from "@tauri-apps/api/path"
+import { invoke } from "@tauri-apps/api/tauri"
 import { JSONPath } from "jsonpath-plus"
+import { PropsWithChildren, useEffect } from "react"
 
 export default function Subscriper({
   jsonPath,

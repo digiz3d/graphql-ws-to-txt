@@ -1,4 +1,3 @@
-import { GraphQLWsLink } from "@apollo/client/link/subscriptions"
 import {
   ApolloClient,
   ApolloProvider,
@@ -6,9 +5,10 @@ import {
   HttpLink,
   split,
 } from "@apollo/client"
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions"
+import { getMainDefinition } from "@apollo/client/utilities"
 import { createClient } from "graphql-ws"
 import { PropsWithChildren, useMemo } from "react"
-import { getMainDefinition } from "@apollo/client/utilities"
 
 export default function CustomApolloProvider({
   children,
