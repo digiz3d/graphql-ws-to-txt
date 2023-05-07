@@ -21,7 +21,7 @@ export default function CustomApolloProvider({
 
     const wsLink = new GraphQLWsLink(
       createClient({
-        url: `ws://${url}`,
+        url,
       }),
     )
 

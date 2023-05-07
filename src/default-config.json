@@ -1,0 +1,18 @@
+{
+  "subscriptions": [
+    {
+      "name": "first",
+      "url": "ws://localhost:8080/graphql",
+      "graphql": "subscription first { eventCreated { id text } }",
+      "jsonPath": "$.eventCreated.text",
+      "outputFile": "first.txt"
+    },
+    {
+      "name": "second",
+      "url": "ws://localhost:8080/graphql",
+      "graphql": "subscription second { eventCreated { id text } }",
+      "jsonPath": "$.eventCreated.id",
+      "outputFile": "second.txt"
+    }
+  ]
+}

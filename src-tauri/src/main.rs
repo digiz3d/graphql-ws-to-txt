@@ -36,9 +36,23 @@ fn read_from_file(path: &str) -> Result<String, String> {
     }
 }
 
+// command to get current dir path
+#[tauri::command]
+fn get_current_dir() -> Result<String, String> {
+    use std::env;
+    match env::current_dir() {
+        Ok(path) => Ok(path.to_str().unwrap().to_string()),
+        Err(e) => Err(format!("Failed to get current dir: {}", e)),
+    }
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![write_to_file, read_from_file])
+        .invoke_handler(tauri::generate_handler![
+            write_to_file,
+            read_from_file,
+            get_current_dir
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

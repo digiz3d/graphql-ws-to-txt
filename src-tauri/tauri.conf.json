@@ -16,9 +16,6 @@
       "shell": {
         "all": false,
         "open": true
-      },
-      "path": {
-        "all": true
       }
     },
     "bundle": {
@@ -42,10 +39,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": true,
-        "title": "graphql-ws-to-txt",
-        "width": 800,
-        "height": 600
+        "resizable": false,
+        "title": "GraphQL Subscription to text",
+        "width": 500,
+        "height": 300
       }
     ]
   }
