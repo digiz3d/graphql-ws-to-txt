@@ -1,10 +1,14 @@
-import { type AppConfiguration } from "./App"
+import { useAtomValue } from "jotai"
+
+import { subscriptionsAtom } from "../state"
+
 import SubscriptionCard from "./SubscriptionCard"
 
-export default function HomePage({ config }: { config: AppConfiguration }) {
+export default function SubscriptionsList() {
+  const subscriptions = useAtomValue(subscriptionsAtom)
   return (
     <div className="flex flex-grow flex-col gap-5 p-5 ">
-      {config.subscriptions.map((subscription) => (
+      {subscriptions.map((subscription) => (
         <SubscriptionCard
           key={subscription.graphql}
           subscription={subscription}

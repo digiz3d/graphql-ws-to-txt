@@ -3,9 +3,15 @@
     {
       "name": "first",
       "url": "ws://localhost:8080/graphql",
-      "graphql": "subscription first { eventCreated { id text } }",
+      "graphql": "subscription first($who: String!) { eventCreated(who: $who) { id text } }",
       "jsonPath": "$.eventCreated.text",
-      "outputFile": "first.txt"
+      "outputFile": "first.txt",
+      "params": {
+        "who": {
+          "type": "string",
+          "value": "tauri"
+        }
+      }
     },
     {
       "name": "second",
